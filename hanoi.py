@@ -11,4 +11,4 @@ def moverTorre(altura, origen, destino, intermedio, memo):
     moverTorre(altura-1, intermedio, destino, origen, memo)
 
 memo = {}
-moverTorre(3, "A", "B", "C", memo)
+moverTorre(5, "A", "B", "C", memo)
