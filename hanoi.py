@@ -13,6 +13,15 @@
 # memo = {}
 # moverTorre(5, "A", "B", "C", memo)
 
+import time
+import csv
+import time
+import csv
+import os.path
+
+headers = ["Discos", "Tiempo"]
+file_exists = os.path.isfile("registros.csv")
+
 def hanoi(n, origen, destino, auxiliar, memo={}):
     if n == 1:
         print(f"Mover disco 1 desde {origen} hacia {destino}")
@@ -28,6 +37,17 @@ def hanoi(n, origen, destino, auxiliar, memo={}):
     memo[key] = movimientos
     return movimientos
 
-# Ejemplo de uso
-movimientos = hanoi(10, "Torre A", "Torre C", "Torre B")
-print(f"Se necesitaron {movimientos} movimientos.")
+cantidad_discos = int(input("Ingrese la cantidad de discos que desea resolver: "))
+
+start_time = time.time()
+movimientos = hanoi(cantidad_discos, "Torre A", "Torre C", "Torre B")
+end_time = time.time()
+tiempo = end_time - start_time
+
+print(f"Para {cantidad_discos} discos se necesitaron {movimientos} movimientos y {tiempo} segundos.")
+
+with open("registros.csv", "a", newline="") as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=headers)
+    if not file_exists:
+        writer.writeheader()
+    writer.writerow({"Discos": cantidad_discos, "Tiempo": tiempo})
