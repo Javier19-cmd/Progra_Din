@@ -1,17 +1,17 @@
-# def moverTorre(altura, origen, destino, intermedio, memo):
+# def moverTorre(altura, origen, destino, intermedio, tabla_movimientos):
 #     if altura == 1:
 #         print("mover disco de", origen, "a", destino)
 #         return
-#     if (altura, origen, destino, intermedio) in memo:
-#         return memo[(altura, origen, destino, intermedio)]
+#     if (altura, origen, destino, intermedio) in tabla_movimientos:
+#         return tabla_movimientos[(altura, origen, destino, intermedio)]
     
-#     moverTorre(altura-1, origen, intermedio, destino, memo)
+#     moverTorre(altura-1, origen, intermedio, destino, tabla_movimientos)
 #     print("mover disco de", origen, "a", destino)
-#     memo[(altura, origen, destino, intermedio)] = True
-#     moverTorre(altura-1, intermedio, destino, origen, memo)
+#     tabla_movimientos[(altura, origen, destino, intermedio)] = True
+#     moverTorre(altura-1, intermedio, destino, origen, tabla_movimientos)
 
-# memo = {}
-# moverTorre(5, "A", "B", "C", memo)
+# tabla_movimientos = {}
+# moverTorre(5, "A", "B", "C", tabla_movimientos)
 
 import time
 import csv
@@ -22,19 +22,19 @@ import os.path
 headers = ["Discos", "Tiempo"]
 file_exists = os.path.isfile("registros.csv")
 
-def hanoi(n, origen, destino, auxiliar, memo={}):
+def hanoi(n, origen, destino, auxiliar, tabla_movimientos={}):
     if n == 1:
         print(f"Mover disco 1 desde {origen} hacia {destino}")
         return 1  # Retorna 1 movimiento
     key = (n, origen, destino, auxiliar)
-    if key in memo:
-        return memo[key]
+    if key in tabla_movimientos:
+        return tabla_movimientos[key]
     movimientos = 0
-    movimientos += hanoi(n-1, origen, auxiliar, destino, memo)
+    movimientos += hanoi(n-1, origen, auxiliar, destino, tabla_movimientos)
     print(f"Mover disco {n} desde {origen} hacia {destino}")
     movimientos += 1  # Añade 1 movimiento
-    movimientos += hanoi(n-1, auxiliar, destino, origen, memo)
-    memo[key] = movimientos
+    movimientos += hanoi(n-1, auxiliar, destino, origen, tabla_movimientos)
+    tabla_movimientos[key] = movimientos
     return movimientos
 
 cantidad_discos = int(input("Ingrese la cantidad de discos que desea resolver: "))
