@@ -1,3 +1,33 @@
+"""
+
+Algoritmo de Programación Dinámica escogido: Dijkstra.
+
+Funcionamiento: 
+
+1. Dados un par de vértices no visitados, se selecciona el vértice con la menor distancia desde la fuente y se visita.
+2. A continuación, se actualiza la distancia de cada vecino. Esto mismo se hace para el vértice visitado, que tiene una distancia actual mayor que la suma y el peso del borde 
+   entre ellos.
+3. Se repite el proceso hasta que todos los vértices hayan sido visitados.
+
+Complejidad:
+
+La complejidad de este algoritmo es O(E + V log V), donde E es el número de aristas y V es el número de nodos en el grafo. Esta complejidad se define así, dado de Dijkstra 
+utiliza una estructura de datos llamada priority queue para poder mantener un seguimiento de los nodos ya procesados y los que aún están por procesar. Esta cola permite encontrar el 
+nodo con la distancia mínima de manera eficiente y se actualiza a medida que se procesan los nodos. Comunmente se utiliza un heap binario para la cola de prioridad para esta cola de 
+prioridad, garantizando así un tiempo de inserción y extracción de elementos en O(log V).
+
+El algoritmo realiza un total de V iteraciones, ya que necesita procesar cda nodo exactamente una vez. En cada iteración, se extrae un nodo de la cola de prioridad, lo que toma 
+O(log V) tiempo. Luego, se recorren todas las aristas adyacentes al nodo extraído, lo que en el peor de los casos puede tomar O(E) tiempo. Sin embargo, en la implementación, la 
+cantidad de aristasa adyacentes a cada nodo suele ser mucho menor que el número total de aristas se vuelve insignificante en comparación con el tiempo de extracción de la cola de 
+prioridad.
+
+Por lo tanto, la complejidad total del algoritmo es O(V log V + E), lo que se reduce a O(E + V log V) porque en el peor de los casos, E es igual a V^2 y O(E) es menos eficiente que
+O(V log V).
+
+
+Referencia: https://www.delftstack.com/es/howto/python/dijkstra-algorithm-python/
+"""
+
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
