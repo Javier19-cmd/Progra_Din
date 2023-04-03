@@ -13,15 +13,19 @@
 # memo = {}
 # moverTorre(5, "A", "B", "C", memo)
 
-def hanoi(n, origen, destino, auxiliar):
+def hanoi(n, origen, destino, auxiliar, memo={}):
     if n == 1:
         print(f"Mover disco 1 desde {origen} hacia {destino}")
         return 1  # Retorna 1 movimiento
+    key = (n, origen, destino, auxiliar)
+    if key in memo:
+        return memo[key]
     movimientos = 0
-    movimientos += hanoi(n-1, origen, auxiliar, destino)
+    movimientos += hanoi(n-1, origen, auxiliar, destino, memo)
     print(f"Mover disco {n} desde {origen} hacia {destino}")
     movimientos += 1  # Añade 1 movimiento
-    movimientos += hanoi(n-1, auxiliar, destino, origen)
+    movimientos += hanoi(n-1, auxiliar, destino, origen, memo)
+    memo[key] = movimientos
     return movimientos
 
 # Ejemplo de uso
