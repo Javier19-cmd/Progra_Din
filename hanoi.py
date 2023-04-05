@@ -37,6 +37,7 @@ def hanoi(n, origen, destino, auxiliar, tabla_movimientos={}):
     tabla_movimientos[key] = movimientos
     return movimientos
 
+# for x in range()
 cantidad_discos = int(input("Ingrese la cantidad de discos que desea resolver: "))
 
 start_time = time.time()
