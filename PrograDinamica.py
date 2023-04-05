@@ -15,12 +15,10 @@
 
 import time
 import csv
-import time
-import csv
 import os.path
 
 headers = ["Discos", "Tiempo"]
-file_exists = os.path.isfile("registros.csv")
+file_exists = os.path.isfile("registros_pd.csv")
 
 def hanoi(n, origen, destino, auxiliar, tabla_movimientos={}):
     if n == 1:
@@ -47,7 +45,7 @@ tiempo = end_time - start_time
 
 print(f"Para {cantidad_discos} discos se necesitaron {movimientos} movimientos y {tiempo} segundos.")
 
-with open("registros.csv", "a", newline="") as csvfile:
+with open("registros_pd.csv", "a", newline="") as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=headers)
     if not file_exists:
         writer.writeheader()
